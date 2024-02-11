@@ -60,9 +60,20 @@ const AddProduct = () => {
              category,
              company,
              userId,
+           },
+          { headers:{
+             "Content-Type": "application/json",
+             authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+          }
            }
          );
-         console.log(response.data);
+         let result= response.data
+        if(result){
+          navigate("/")
+          console.log(result);
+        }else{
+          console.log("No Result!")
+        }
        } catch (error) {
          console.error("Error adding product:", error);
        }

@@ -31,7 +31,8 @@ const Signup = () => {
        let result = response.data;
 
        if (result) {
-         localStorage.setItem("user", JSON.stringify(result));
+         localStorage.setItem("user", JSON.stringify(result.result));
+         localStorage.setItem("token", JSON.stringify(result.token));
          navigate("/");
        }
 

@@ -20,7 +20,12 @@ const UpdateProduct = () => {
 const getProductDetail = async () => {
   console.log(params);
     const response = await axios.get(
-      `http://localhost:5005/product/${params.id}`
+      `http://localhost:5005/product/${params.id}`,
+      {
+        headers: {
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      }
     );
     const result = response.data;
     console.log(result);
@@ -34,16 +39,21 @@ const getProductDetail = async () => {
   const updateProduct = async () => {
   console.log(name, price, category, company);
 
-    const response = await axios.put(`http://localhost:5005/product/${params.id}`, {
-      name,
-      price,
-      category,
-      company
-    }, {
-      headers: {
-        "Content-Type": "application/json"
+    const response = await axios.put(
+      `http://localhost:5005/product/${params.id}`,
+      {
+        name,
+        price,
+        category,
+        company,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       }
-    })
+    );
     let result= response.data
     if(result){
       console.log("update Working")
